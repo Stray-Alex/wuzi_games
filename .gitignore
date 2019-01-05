@@ -3,3 +3,5 @@ venv/
 *.pyc
 .idea/workspace.xml
 *.xml
+*.iml
+.idea/my_games.iml
