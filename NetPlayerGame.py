@@ -212,7 +212,7 @@ class NetPlayerGame(DoublePlayerGame):
                 if self.color_flag == 'white':
                     self.player.pic = QPixmap('source/白子2.png')
                 else:
-                    self.player.pic = QPixmap('source/黑子子2.png')
+                    self.player.pic = QPixmap('source/黑子2.png')
                 self.player.setPixmap(self.player.pic)
                 self.player.setFixedSize(self.player.pic.size())
                 self.player.move(800, 290)
@@ -235,18 +235,18 @@ class NetPlayerGame(DoublePlayerGame):
                     self.chess_map[i][j] = None
                     self.focus_Point.hide()
         self.color_flag = 'black'
-        threading.Thread(target=self.bgm).start()
+
 
     def downChessman(self, point, color):
         self.qishou = QLabel('当前棋手：', self)
-        self.qishou.move(800, 350)
+        self.qishou.move(790, 260)
         if self.color_flag == 'black':
             self.player.pic = QPixmap('source/白子2.png')
         else:
-            self.player.pic = QPixmap('source/黑子子2.png')
+            self.player.pic = QPixmap('source/黑子2.png')
         self.player.setPixmap(self.player.pic)
         self.player.setFixedSize(self.player.pic.size())
-        self.player.move(800, 380)
+        self.player.move(800, 290)
         self.player.show()
 
         chess_index = (point.y(), point.x())  # 棋子在棋盘中的下标
@@ -346,14 +346,14 @@ class NetPlayerGame(DoublePlayerGame):
         self.chess_map[self.chessman.map_point_x][self.chessman.map_point_y] = self.chessman
         self.chessman.show()
         self.qishou = QLabel('当前棋手：', self)
-        self.qishou.move(800, 350)
+        self.qishou.move(790, 260)
         if self.color_flag == 'white':
             self.player.pic = QPixmap('source/白子2.png')
         else:
-            self.player.pic = QPixmap('source/黑子子2.png')
+            self.player.pic = QPixmap('source/黑子2.png')
         self.player.setPixmap(self.player.pic)
         self.player.setFixedSize(self.player.pic.size())
-        self.player.move(800, 380)
+        self.player.move(800, 290)
         self.player.show()
 
         print(self.chess_map[self.chessman.map_point_x][self.chessman.map_point_y].color)

@@ -60,7 +60,7 @@ class SinglePlayerGame(QWidget):
         self.p2.move(750, 400)
         self.p2.show()
 
-        threading.Thread(target=self.__bgm).start()
+        # threading.Thread(target=self.bgm).start()
 
         #  绘制背景图
 
@@ -128,7 +128,6 @@ class SinglePlayerGame(QWidget):
                     self.chess_map[i][j] = None
                     self.focus_Point.hide()
         self.color_flag = 'black'
-        threading.Thread(target=self.bgm).start()
         try:
             self.win_lbl.close()
         except Exception as e:
