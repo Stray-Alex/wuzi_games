@@ -24,6 +24,20 @@ class NetPlayerGame(DoublePlayerGame):
         self.local_color = None
         self.st_over = True
 
+        self.p1 = QLabel(self)
+        self.p1.pic = QPixmap("source/p1.png")
+        self.p1.setPixmap(self.p1.pic)
+        self.p1.setFixedSize(self.p1.pic.size())
+        self.p1.move(750, 50)
+        self.p1.show()
+
+        self.p2 = QLabel(self)
+        self.p2.pic = QPixmap("source/p2.png")
+        self.p2.setPixmap(self.p2.pic)
+        self.p2.setFixedSize(self.p2.pic.size())
+        self.p2.move(750, 400)
+        self.p2.show()
+
         self.press = MyButton('source/催促按钮_hover.png',
                               'source/催促按钮_normal.png',
                               'source/催促按钮_press.png', parent=self)
@@ -162,14 +176,14 @@ class NetPlayerGame(DoublePlayerGame):
                 self.chess_map[n.map_point_x][n.map_point_y] = None
 
                 self.qishou = QLabel('当前棋手：', self)
-                self.qishou.move(800, 350)
+                self.qishou.move(790, 260)
                 if self.color_flag == 'white':
                     self.player.pic = QPixmap('source/白子2.png')
                 else:
                     self.player.pic = QPixmap('source/黑子子2.png')
                 self.player.setPixmap(self.player.pic)
                 self.player.setFixedSize(self.player.pic.size())
-                self.player.move(800, 380)
+                self.player.move(800, 290)
                 self.player.show()
         except Exception as e:
             print(e)

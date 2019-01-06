@@ -58,9 +58,9 @@ class WinLabel(QLabel):
         self.color = color
         self.pic = None
         if self.color == 'black':
-            self.pic = QPixmap('source/黑棋胜利.png')
+            self.pic = QPixmap('source/胜利1.png')
         else:
-            self.pic = QPixmap('source/白棋胜利.png')
+            self.pic = QPixmap('source/胜利22.png')
         self.setPixmap(self.pic)
         self.setFixedSize(self.pic.size())
 
@@ -84,13 +84,13 @@ class DoublePlayerGame(QWidget):
         self.history_chess=[]
 
         self.qishou = QLabel('当前棋手：',self)
-        self.qishou.move(800,350)
+        self.qishou.move(790,260)
         # 棋手标识
         self.player = QLabel(self)
         self.player.pic = QPixmap('source/黑子2.png')
         self.player.setPixmap(self.player.pic)
         self.player.setFixedSize(self.player.pic.size())
-        self.player.move(830, 380)
+        self.player.move(800, 290)
         self.player.show()
 
 
@@ -125,6 +125,19 @@ class DoublePlayerGame(QWidget):
                            'source/认输按钮_press.png', parent=self)
         self.gg.move(650, 400)
 
+        self.p1 = QLabel(self)
+        self.p1.pic=QPixmap("source/p1.png")
+        self.p1.setPixmap(self.p1.pic)
+        self.p1.setFixedSize(self.p1.pic.size())
+        self.p1.move(750,50)
+        self.p1.show()
+
+        self.p2 = QLabel(self)
+        self.p2.pic = QPixmap("source/p2.png")
+        self.p2.setPixmap(self.p2.pic)
+        self.p2.setFixedSize(self.p2.pic.size())
+        self.p2.move(750, 400)
+        self.p2.show()
 
 
 
@@ -183,14 +196,14 @@ class DoublePlayerGame(QWidget):
                     self.color_flag='black'
 
                 self.qishou = QLabel('当前棋手：', self)
-                self.qishou.move(800, 350)
+                self.qishou.move(790, 260)
                 if self.color_flag == 'white':
                     self.player.pic = QPixmap('source/白子2.png')
                 else:
                     self.player.pic = QPixmap('source/黑子2.png')
                 self.player.setPixmap(self.player.pic)
                 self.player.setFixedSize(self.player.pic.size())
-                self.player.move(830, 380)
+                self.player.move(800, 280)
                 self.player.show()
         except Exception as e:
             print(e)
@@ -265,14 +278,14 @@ class DoublePlayerGame(QWidget):
         self.focus_Point.raise_()
 
         self.qishou = QLabel('当前棋手：', self)
-        self.qishou.move(800, 350)
+        self.qishou.move(790, 260)
         if self.color_flag == 'white':
             self.player.pic = QPixmap('source/白子2.png')
         else:
             self.player.pic = QPixmap('source/黑子2.png')
         self.player.setPixmap(self.player.pic)
         self.player.setFixedSize(self.player.pic.size())
-        self.player.move(830, 380)
+        self.player.move(800, 290)
         self.player.show()
 
         self.history_chess.append(self.chessman)
@@ -311,6 +324,7 @@ class DoublePlayerGame(QWidget):
                 print('白棋 胜利')
                 self.win_lbl.show()
                 self.st_over = True
+                QSound.play('source/shen1.mp3')
                 return
             elif self.chess_map[self.chessman.map_point_x][self.chessman.map_point_y].color == 'black':
                 self.win_lbl = WinLabel(color='black', parent=self)
@@ -318,6 +332,7 @@ class DoublePlayerGame(QWidget):
                 self.win_lbl.show()
                 print('黑棋 胜利')
                 self.st_over = True
+                QSound.play('source/shen1.mp3')
                 return
 
     def whoIsWiner(self, chessman):
