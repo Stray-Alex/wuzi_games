@@ -235,6 +235,7 @@ class NetPlayerGame(DoublePlayerGame):
                     self.chess_map[i][j] = None
                     self.focus_Point.hide()
         self.color_flag = 'black'
+        threading.Thread(target=self.bgm).start()
 
     def downChessman(self, point, color):
         self.qishou = QLabel('当前棋手：', self)

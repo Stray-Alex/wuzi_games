@@ -190,6 +190,7 @@ class DoublePlayerGame(QWidget):
                     self.chess_map[i][j] = None
                     self.focus_Point.hide()
         self.color_flag = 'black'
+        threading.Thread(target=self.bgm).start()
 
     def goUndo(self):
         try:

@@ -105,8 +105,10 @@ class SinglePlayerGame(QWidget):
         self.undo_play.clicked.connect(self.goUndo)
         self.gg.clicked.connect(self.goGG)
 
-    def __bgm(self):
-        QSound.play('source/bgm.wav')
+    def bgm(self):
+
+        while True:
+            QSound.play('source/bgm.wav')
 
     def goBack(self):
         self.backSignal.emit()
@@ -126,6 +128,7 @@ class SinglePlayerGame(QWidget):
                     self.chess_map[i][j] = None
                     self.focus_Point.hide()
         self.color_flag = 'black'
+        threading.Thread(target=self.bgm).start()
         try:
             self.win_lbl.close()
         except Exception as e:
