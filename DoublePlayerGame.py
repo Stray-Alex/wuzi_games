@@ -95,7 +95,7 @@ class DoublePlayerGame(QWidget):
         self.player.show()
 
 
-        threading.Thread(target=self.__bgm).start()
+
 
 
 
@@ -167,8 +167,9 @@ class DoublePlayerGame(QWidget):
         self.gg.clicked.connect(self.goGG)
 
 
-    def __bgm(self):
-        QSound.play('source/bgm.mp3')
+    def bgm(self):
+        while True:
+            QSound.play('source/bgm.wav')
 
 
     def goBack(self):
@@ -225,12 +226,14 @@ class DoublePlayerGame(QWidget):
             self.win_lbl = WinLabel(color='white', parent=self)
             self.win_lbl.move(100, 100)
             self.win_lbl.show()
+            QSound.play('source/shen1.wav')
             self.st_over = True
         else:
             print("白棋认输 黑棋胜")
             self.win_lbl = WinLabel(color='black', parent=self)
             self.win_lbl.move(100, 100)
             self.win_lbl.show()
+            QSound.play('source/shen1.wav')
             self.st_over = True
 
 

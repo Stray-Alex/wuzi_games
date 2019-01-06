@@ -12,6 +12,7 @@ from DoublePlayerGame import WinLabel
 from MyButton import MyButton
 import sys
 from PyQt5.QtMultimedia import QSound
+import threading
 import random
 
 
@@ -34,6 +35,7 @@ class SinglePlayerGame(QWidget):
         self.history_chess = []
         # 白子得分
         self.machine_goal = []
+        bp=['source/b1.jpg','source/b2.Gif','source/b3.gif']
 
         self.qishou = QLabel('当前棋手：', self)
         self.qishou.move(790, 260)
@@ -57,6 +59,8 @@ class SinglePlayerGame(QWidget):
         self.p2.setFixedSize(self.p2.pic.size())
         self.p2.move(750, 400)
         self.p2.show()
+
+        threading.Thread(target=self.__bgm).start()
 
         #  绘制背景图
 
@@ -100,6 +104,9 @@ class SinglePlayerGame(QWidget):
         self.start_game.clicked.connect(self.goStart)
         self.undo_play.clicked.connect(self.goUndo)
         self.gg.clicked.connect(self.goGG)
+
+    def __bgm(self):
+        QSound.play('source/bgm.wav')
 
     def goBack(self):
         self.backSignal.emit()
@@ -157,13 +164,15 @@ class SinglePlayerGame(QWidget):
         if self.color_flag == 'black':
             print("黑棋认输，白棋胜")
             self.win_lbl = WinLabel(color='white', parent=self)
-            self.win_lbl.move(100, 100)
+            self.win_lbl.move(20, 100)
+            QSound.play('source/shen1.wav')
             self.win_lbl.show()
             self.st_over = True
         else:
             print("白棋认输 黑棋胜")
             self.win_lbl = WinLabel(color='black', parent=self)
-            self.win_lbl.move(100, 100)
+            self.win_lbl.move(20, 100)
+            QSound.play('source/shen1.wav')
             self.win_lbl.show()
             self.st_over = True
 

@@ -8,6 +8,9 @@ import json
 from PyQt5.QtCore import *
 from DoublePlayerGame import *
 from PyQt5.QtMultimedia import QSound
+import threading
+import random
+import time
 
 class NetPlayerGame(DoublePlayerGame):
     def __init__(self, net_object, parent=None):
@@ -23,6 +26,12 @@ class NetPlayerGame(DoublePlayerGame):
         self.color_flag = 'black'
         self.local_color = None
         self.st_over = True
+
+        self.bp = ['source/b1.jpg', 'source/b2.gif', 'source/b3.gif','source/b4.gif','source/b5.gif','source/b6.gif','source/b7.gif','source/b8.gif','source/b9.gif']
+
+        self.b_lable=QLabel(self)
+
+
 
         self.p1 = QLabel(self)
         self.p1.pic = QPixmap("source/p1.png")
@@ -49,7 +58,28 @@ class NetPlayerGame(DoublePlayerGame):
         QSound.play("source/cuicu.wav")
         msg = {}
         msg['msg_type'] = 'cuicu'
+
+        threading.Thread(target=self.showBP).start()
         self.net_object.send(json.dumps(msg))
+
+
+
+    def showBP(self):
+        try:
+            a = random.randint(0, 6)
+            self.b_lable.ind=a
+            self.b_lable.pic = QPixmap(self.bp[a])
+            self.b_lable.setPixmap(self.b_lable.pic)
+            self.b_lable.setFixedSize(self.b_lable.pic.size())
+            self.b_lable.move(0, 0)
+            self.b_lable.show()
+            time.sleep(2)
+            self.b_lable.close()
+        except Exception as e:
+            print(e)
+
+
+
 
     def goBack(self):
         self.backSignal.emit()
@@ -143,12 +173,14 @@ class NetPlayerGame(DoublePlayerGame):
                 self.net_object.send(json.dumps(msg))
         elif msg['msg_type'] == "goGG":
             self.win_lbl = WinLabel(color=self.local_color, parent=self)
-            self.win_lbl.move(100, 100)
+            self.win_lbl.move(20, 100)
             self.win_lbl.show()
+            QSound.play('source/shen1.wav')
             self.st_over = True
             return
         elif msg['msg_type'] == 'cuicu':
             QSound.play('source/cuicu.wav')
+            threading.Thread(target=self.showBP).start()
 
     def goUndo(self):
 
