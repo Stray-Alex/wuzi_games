@@ -9,6 +9,7 @@ from PyQt5 import *
 from MyButton import MyButton
 import sys
 from PyQt5.QtMultimedia import QSound
+import threading
 
 
 class Chessman(QLabel):
@@ -94,6 +95,9 @@ class DoublePlayerGame(QWidget):
         self.player.show()
 
 
+        threading.Thread(target=self.__bgm).start()
+
+
 
         #  绘制背景图
 
@@ -161,6 +165,11 @@ class DoublePlayerGame(QWidget):
         self.start_game.clicked.connect(self.goStart)
         self.undo_play.clicked.connect(self.goUndo)
         self.gg.clicked.connect(self.goGG)
+
+
+    def __bgm(self):
+        QSound.play('source/bgm.mp3')
+
 
     def goBack(self):
         self.backSignal.emit()
@@ -320,19 +329,19 @@ class DoublePlayerGame(QWidget):
         if self.whoIsWiner(self.chessman) == True:
             if self.chess_map[self.chessman.map_point_x][self.chessman.map_point_y].color == 'white':
                 self.win_lbl = WinLabel(color='white', parent=self)
-                self.win_lbl.move(40, 100)
+                self.win_lbl.move(20, 100)
                 print('白棋 胜利')
                 self.win_lbl.show()
                 self.st_over = True
-                QSound.play('source/shen1.mp3')
+                QSound.play('source/shen1.wav')
                 return
             elif self.chess_map[self.chessman.map_point_x][self.chessman.map_point_y].color == 'black':
                 self.win_lbl = WinLabel(color='black', parent=self)
-                self.win_lbl.move(40, 100)
+                self.win_lbl.move(20, 100)
                 self.win_lbl.show()
                 print('黑棋 胜利')
                 self.st_over = True
-                QSound.play('source/shen1.mp3')
+                QSound.play('source/shen1.wav')
                 return
 
     def whoIsWiner(self, chessman):

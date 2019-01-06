@@ -256,19 +256,19 @@ class SinglePlayerGame(QWidget):
         if self.whoIsWiner(self.chessman) == True:
             if self.chess_map[self.chessman.map_point_x][self.chessman.map_point_y].color == 'white':
                 self.win_lbl = WinLabel(color='white', parent=self)
-                self.win_lbl.move(40, 100)
+                self.win_lbl.move(20, 100)
                 print('白棋 胜利')
                 self.win_lbl.show()
                 self.st_over = True
-                QSound.play('source/shen1.mp3')
+                QSound.play('source/shen1.wav')
                 return
             elif self.chess_map[self.chessman.map_point_x][self.chessman.map_point_y].color == 'black':
                 self.win_lbl = WinLabel(color='black', parent=self)
-                self.win_lbl.move(40, 100)
+                self.win_lbl.move(20, 100)
                 self.win_lbl.show()
                 print('黑棋 胜利')
                 self.st_over = True
-                QSound.play('source/shen1.mp3')
+                QSound.play('source/shen1.wav')
                 return
 
     def whoIsWiner(self, chessman):
