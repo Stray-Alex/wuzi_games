@@ -58,9 +58,9 @@ class WinLabel(QLabel):
         self.color = color
         self.pic = None
         if self.color == 'black':
-            self.pic = QPixmap('source/胜利1.png')
+            self.pic = QPixmap('source/黑1.png')
         else:
-            self.pic = QPixmap('source/胜利22.png')
+            self.pic = QPixmap('source/白胜1.png')
         self.setPixmap(self.pic)
         self.setFixedSize(self.pic.size())
 
@@ -320,7 +320,7 @@ class DoublePlayerGame(QWidget):
         if self.whoIsWiner(self.chessman) == True:
             if self.chess_map[self.chessman.map_point_x][self.chessman.map_point_y].color == 'white':
                 self.win_lbl = WinLabel(color='white', parent=self)
-                self.win_lbl.move(100, 100)
+                self.win_lbl.move(40, 100)
                 print('白棋 胜利')
                 self.win_lbl.show()
                 self.st_over = True
@@ -328,7 +328,7 @@ class DoublePlayerGame(QWidget):
                 return
             elif self.chess_map[self.chessman.map_point_x][self.chessman.map_point_y].color == 'black':
                 self.win_lbl = WinLabel(color='black', parent=self)
-                self.win_lbl.move(100, 100)
+                self.win_lbl.move(40, 100)
                 self.win_lbl.show()
                 print('黑棋 胜利')
                 self.st_over = True
